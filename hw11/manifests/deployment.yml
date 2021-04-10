@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw11-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hw11-app
+  template:
+    metadata:
+      labels:
+        app: hw11-app
+    spec:
+      containers:
+      - name: hw11
+        image: adlet1998nis/soft-architecture-hw11:v3
+        command: ["python"]
+        args: [
+          "manage.py",
+          "runserver",
+          "0.0.0.0:8000"
+        ]
+        ports:
+        - name: web
+          containerPort: 8000
+        livenessProbe:
+          httpGet:
+            port: 8000
+            path: /health
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 2
+        readinessProbe:
+          httpGet:
+            port: 8000
+            path: /health
+          initialDelaySeconds: 10
+          periodSeconds: 5

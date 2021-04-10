@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw12backend-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hw12backend-app
+  template:
+    metadata:
+      labels:
+        app: hw12backend-app
+    spec:
+      containers:
+      - name: hw12backend
+        image: adlet1998nis/soft-architecture-hw12backend:v1
+        command: ["python"]
+        args: [
+          "manage.py",
+          "runserver",
+          "0.0.0.0:8000"
+        ]
+        ports:
+        - name: web
+          containerPort: 8000
+        livenessProbe:
+          httpGet:
+            port: 8000
+            path: /get-name
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 2
+        readinessProbe:
+          httpGet:
+            port: 8000
+            path: /get-name
+          initialDelaySeconds: 10
+          periodSeconds: 5

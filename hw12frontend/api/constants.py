@@ -1,0 +1,1 @@
+BACKEND_API_URL = 'http://10.106.24.69:9000'
