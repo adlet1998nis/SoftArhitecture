@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  hw2:
+    ports:
+      - "8001:8000"
+
+  hw2-db:
+    ports:
+      - "5433:5432"
