@@ -6,8 +6,16 @@ services:
       context: .
       dockerfile: Dockerfile
     command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - POSTGRES_DB=hw2
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
     volumes:
       - .:/code
 
   hw2-db:
     image: postgres:10.11-alpine
+    environment:
+      - POSTGRES_DB=hw2
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres

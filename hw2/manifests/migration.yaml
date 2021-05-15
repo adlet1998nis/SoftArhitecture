@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hw2-migration
+spec:
+  template:
+    spec:
+      containers:
+        - name: hw2-migration
+          image: adlet1998nis/soft-architecture-hw2:latest
+          command: ["python"]
+          args: [
+            "manage.py",
+            "migrate"
+          ]
+          env:
+            - name: POSTGRES_DB
+              value: hw2
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+
+      restartPolicy: Never
+  backoffLimit: 5

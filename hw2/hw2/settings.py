@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import dj_database_url
 from pathlib import Path
+
+from . import environ
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-km3*&+nmklwa!9i_u9ybh3b(n4z_xhua0i^s@jr253zlr03^v1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -80,10 +82,12 @@ WSGI_APPLICATION = 'hw2.wsgi.application'
 
 DATABASES = {
     'default': {
-        **dj_database_url.config(
-            default='postgres://postgres@hw2-db:5432/postgres',
-            engine='django.db.backends.postgresql_psycopg2',
-        ),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': environ.get('POSTGRES_DB'),
+        'USER': environ.get('POSTGRES_USER'),
+        'PASSWORD': environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'hw2-db',
+        'PORT': '5432',
         'ATOMIC_REQUESTS': True,
     }
 }

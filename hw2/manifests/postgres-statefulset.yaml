@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hw2-db-statefulset
+spec:
+  serviceName: "hw2-db"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hw2-db
+  template:
+    metadata:
+      labels:
+        app: hw2-db
+    spec:
+      containers:
+      - name: hw2-db
+        image: postgres:10.11-alpine
+        ports:
+        - containerPort: 5432
+          name: hw2db
+        env:
+          - name: POSTGRES_DB
+            value: hw2
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: postgres
+        volumeMounts:
+        - name: hw2db
+          mountPath: /var/lib/postgresql/data
+          subPath: hw2-db
+  volumeClaimTemplates:
+  - metadata:
+      name: hw2db
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 1Gi
