@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hw2
+  template:
+    metadata:
+      labels:
+        app: hw2
+    spec:
+      containers:
+      - name: hw2
+        image: adlet1998nis/soft-architecture-hw2:latest
+        command: ["python"]
+        args: [
+          "manage.py",
+          "runserver",
+          "0.0.0.0:8000"
+        ]
+        ports:
+        - name: web
+          containerPort: 8000
+        env:
+          - name: POSTGRES_DB
+            value: hw2
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: postgres
