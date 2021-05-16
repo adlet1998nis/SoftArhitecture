@@ -1,0 +1,11 @@
+replicaCount: 1
+
+image: adlet1998nis/soft-architecture-hw2:latest
+
+Django:
+  secretKey: django-insecure-km3*&+nmklwa!9i_u9ybh3b(n4z_xhua0i^s@jr253zlr03^v1
+
+externalPostgresql:
+  postgresqlDatabase: hw2-db-dev
+  postgresqlUsername: postgres-dev
+  postgresqlPassword: postgres-dev
