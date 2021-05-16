@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hw2-config
+data:
+  SECRET_KEY: django-insecure-km3*&+nmklwa!9i_u9ybh3b(n4z_xhua0i^s@jr253zlr03^v1
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hw2-secret
+type: Opaque
+data:
+  POSTGRES_DB: aHcy
+  POSTGRES_PASSWORD: cG9zdGdyZXM=
+  POSTGRES_USER: cG9zdGdyZXM=
