@@ -10,6 +10,7 @@ services:
       - POSTGRES_DB=hw2
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
+      - SECRET_KEY=django-insecure-km3*&+nmklwa!9i_u9ybh3b(n4z_xhua0i^s@jr253zlr03^v1
     volumes:
       - .:/code
 

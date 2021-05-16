@@ -26,8 +26,22 @@ spec:
           containerPort: 8000
         env:
           - name: POSTGRES_DB
-            value: hw2
-          - name: POSTGRES_USER
-            value: postgres
+            valueFrom:
+              secretKeyRef:
+                name: hw2-secret
+                key: POSTGRES_DB
           - name: POSTGRES_PASSWORD
-            value: postgres
+            valueFrom:
+              secretKeyRef:
+                name: hw2-secret
+                key: POSTGRES_PASSWORD
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: hw2-secret
+                key: POSTGRES_USER
+          - name: SECRET_KEY
+            valueFrom:
+              configMapKeyRef:
+                name: hw2-config
+                key: SECRET_KEY
