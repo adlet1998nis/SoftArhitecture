@@ -38,7 +38,7 @@ spec:
         volumeMounts:
         - name: hw2db
           mountPath: /var/lib/postgresql/data
-          subPath: hw2-db
+          subPath: {{ .Values.externalPostgresql.postgresqlDatabase }}
   volumeClaimTemplates:
   - metadata:
       name: hw2db
