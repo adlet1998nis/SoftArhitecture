@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hw2-migration
+spec:
+  template:
+    spec:
+      containers:
+        - name: hw2-migration
+          image: {{ .Values.image }}
+          command: ["python"]
+          args: [
+            "manage.py",
+            "migrate"
+          ]
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: hw2-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hw2-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: hw2-secret
+                  key: POSTGRES_USER
+            - name: SECRET_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: hw2-config
+                  key: SECRET_KEY
+
+      restartPolicy: Never
+  backoffLimit: 5
